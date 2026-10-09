@@ -37,12 +37,7 @@ export default defineConfig(({mode}) => {
                     runtimeCaching: [],
                     navigateFallback: null,
                     cleanupOutdatedCaches: true,
-                    // 🚀 核心修复：在这里告诉 PWA 插件（Workbox）不要在构建 Service Worker 时强行打包 Node 内置包
-                    dontCacheBustURLsMatching: /__\w+$/,
-                    exclude: [
-                        'path', 'os', 'crypto', 'async_hooks', 'diagnostics_channel',
-                        'node:path', 'node:os', 'node:crypto', 'node:async_hooks', 'node:diagnostics_channel'
-                    ]
+                    // 🚀 修复：移除了之前导致报错的 exclude 属性
                 }
             }),
             AutoImport({
@@ -62,7 +57,7 @@ export default defineConfig(({mode}) => {
             outDir: env.VITE_OUT_DIR || 'dist',
             emptyOutDir: true,
             assetsInclude: ['**/*.json'],
-            // 🚀 核心修复：在此处告知外层构建工具 Vite/Rollup 跳过打包报错的 Node.js 模块
+            // 🚀 保留核心修复：只在这里通过 rollupOptions 来放行 Node 依赖包，不会引发 PWA 插件报错
             rollupOptions: {
                 external: [
                     'path',
