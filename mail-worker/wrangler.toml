@@ -14,7 +14,9 @@
 # and mail stops flowing. Confirm `name` does not collide before deploying.
 
 name = "cloud-mail"
-main = "src/index.js"
+# main = "src/index.js"
+main = "dist/index.js"
+
 compatibility_date = "2025-06-04"
 compatibility_flags = ["nodejs_compat"]
 keep_vars = true
