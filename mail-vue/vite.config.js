@@ -37,6 +37,12 @@ export default defineConfig(({mode}) => {
                     runtimeCaching: [],
                     navigateFallback: null,
                     cleanupOutdatedCaches: true,
+                    // 🚀 核心修复：在这里告诉 PWA 插件（Workbox）不要在构建 Service Worker 时强行打包 Node 内置包
+                    dontCacheBustURLsMatching: /__\w+$/,
+                    exclude: [
+                        'path', 'os', 'crypto', 'async_hooks', 'diagnostics_channel',
+                        'node:path', 'node:os', 'node:crypto', 'node:async_hooks', 'node:diagnostics_channel'
+                    ]
                 }
             }),
             AutoImport({
@@ -55,7 +61,22 @@ export default defineConfig(({mode}) => {
             target: 'es2022',
             outDir: env.VITE_OUT_DIR || 'dist',
             emptyOutDir: true,
-            assetsInclude: ['**/*.json']
+            assetsInclude: ['**/*.json'],
+            // 🚀 核心修复：在此处告知外层构建工具 Vite/Rollup 跳过打包报错的 Node.js 模块
+            rollupOptions: {
+                external: [
+                    'path',
+                    'os',
+                    'crypto',
+                    'async_hooks',
+                    'diagnostics_channel',
+                    'node:path',
+                    'node:os',
+                    'node:crypto',
+                    'node:async_hooks',
+                    'node:diagnostics_channel'
+                ]
+            }
         }
     }
 })
