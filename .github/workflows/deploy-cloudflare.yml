@@ -228,7 +228,6 @@ jobs:
           
           echo "worker_url=$WORKER_URL" >> $GITHUB_OUTPUT
           echo "✅ Setup completed."
-
       - name: ♻️ 初始化数据库 / Initialize database
         run: |
           echo "🛠️ Starting database initialization..."
