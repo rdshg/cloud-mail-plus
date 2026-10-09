@@ -206,6 +206,8 @@ jobs:
       - name: 🚀 开始部署 / Start deployment
         id: deploy
         working-directory: ./mail-worker
+        env:
+          WRANGLER_COMPATIBILITY_FLAGS: "nodejs_compat"
         run: |
           echo "🚀 Starting deployment..."
           # 🚀 核心修复：在此处命令末尾直接注入最高优先级的 --compatibility-flags 参数
@@ -228,6 +230,7 @@ jobs:
           
           echo "worker_url=$WORKER_URL" >> $GITHUB_OUTPUT
           echo "✅ Setup completed."
+          
       - name: ♻️ 初始化数据库 / Initialize database
         run: |
           echo "🛠️ Starting database initialization..."
