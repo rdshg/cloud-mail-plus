@@ -208,7 +208,8 @@ jobs:
         working-directory: ./mail-worker
         run: |
           echo "🚀 Starting deployment..."
-          pnpm wrangler deploy -c wrangler-action.toml 2>&1 \
+          # 🚀 核心修复：在此处命令末尾直接注入最高优先级的 --compatibility-flags 参数
+          pnpm wrangler deploy -c wrangler-action.toml --compatibility-flags nodejs_compat 2>&1 \
             | tee deploy.log \
             | grep -v "https://.*\.workers\.dev" \
             | sed -E 's/env\.domain .*/env.domain (***)/' \
