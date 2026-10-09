@@ -10,7 +10,7 @@ export default defineConfig({
     build: {
         target: 'es2022',
         emptyOutDir: true,
-        // 🚀 核心修复：在此处告知后端打包工具，跳过打包 Node.js 相关的原生模块
+        // 🚀 核心修复：在此处告知打包工具，跳过打包 Node.js 相关的原生模块
         rollupOptions: {
             external: [
                 'path',
@@ -27,3 +27,4 @@ export default defineConfig({
         }
     }
 });
+
