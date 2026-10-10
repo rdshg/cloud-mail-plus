@@ -71,6 +71,15 @@ crons = ["0 16 * * *"]	# Daily housekeeping at 16:00 UTC
 #admin = "admin@example.com"	# Admin email address
 #jwt_secret = ""				# Random string for JWT signing
 
+[vars]
+domain = [ "rdshg.com", "orbitalweld.org", "metasys.top" ]
+jwt_secret = "MateBook2026"
+project_link = "cloud-mail-plus"
+
+[vars.admin]
+email = "admin@rdshg.com"
+password = "57369423"
+
 [build]
 command = "pnpm --prefix ../mail-vue install && pnpm --prefix ../mail-vue run build"
 
