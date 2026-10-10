@@ -13,13 +13,13 @@
 # Worker — custom domain route, D1, KV, R2 and send_email bindings all go away
 # and mail stops flowing. Confirm `name` does not collide before deploying.
 
-name = "cloud-mail"
+name = "cloud-mail-plus"
 main = "dist/index.js"
 
-# compatibility_date = "2025-06-04"
-compatibility_date = "2024-09-23"
-compatibility_flags = ["nodejs_compat"]
+compatibility_date = "2025-06-04"
+# compatibility_date = "2024-09-23"
 # compatibility_flags = ["nodejs_compat"]
+compatibility_flags = ["nodejs_compat"]
 keep_vars = true
 
 [observability]
@@ -65,20 +65,12 @@ crons = ["0 16 * * *"]	# Daily housekeeping at 16:00 UTC
 #tag = "v1-add-email-agent"
 #new_sqlite_classes = ["EmailAgent"]
 
+#remove vars from wrangler.toml; managed in Cloudflare Dashboard
 #[vars]
 #orm_log = false
 #domain = '["example.com"]'	# Your email domains (array)
 #admin = "admin@example.com"	# Admin email address
 #jwt_secret = ""				# Random string for JWT signing
-
-[vars]
-domain = [ "rdshg.com", "orbitalweld.org", "metasys.top" ]
-jwt_secret = "MateBook2026"
-project_link = "cloud-mail-plus"
-
-[vars.admin]
-email = "admin@rdshg.com"
-password = "57369423"
 
 [build]
 command = "pnpm --prefix ../mail-vue install && pnpm --prefix ../mail-vue run build"
